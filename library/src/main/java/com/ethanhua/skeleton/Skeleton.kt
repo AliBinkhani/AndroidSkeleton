@@ -19,7 +19,7 @@ object Skeleton {
     }
 
     @JvmStatic
-    fun bind(view: LinearLayout): ViewSkeletonScreen.Builder {
-        return ViewSkeletonScreen.Builder(view)
+    fun bind(view: LinearLayout): LinearLayoutViewSkeletonScreen.Builder {
+        return LinearLayoutViewSkeletonScreen.Builder(view)
     }
 }
