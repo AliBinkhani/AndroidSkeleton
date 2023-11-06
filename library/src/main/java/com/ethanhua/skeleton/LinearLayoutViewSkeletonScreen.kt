@@ -34,6 +34,9 @@ class LinearLayoutViewSkeletonScreen private constructor(builder: Builder) : Ske
     private val mItemCount = builder.mItemCount
     private val mItemsOrientation = builder.mOrientation
 
+    override var isSowing: Boolean = false
+        private set
+
     private fun generateShimmerContainerLayout(parentView: ViewGroup): ShimmerFrameLayout {
         val shimmerLayout = LayoutInflater.from(mActualView.context).inflate(R.layout.linear_layout_shimmer, parentView, false) as ShimmerFrameLayout
         val shimmer = if (mUseAlpha) {
@@ -93,6 +96,7 @@ class LinearLayoutViewSkeletonScreen private constructor(builder: Builder) : Ske
     }
 
     override fun show(): LinearLayoutViewSkeletonScreen {
+        isSowing = true
         val skeletonLoadingView = generateSkeletonLoadingView()
         if (skeletonLoadingView != null) {
             mViewReplacer.replace(skeletonLoadingView)
@@ -101,6 +105,7 @@ class LinearLayoutViewSkeletonScreen private constructor(builder: Builder) : Ske
     }
 
     override fun hide() {
+        isSowing = false
         (mViewReplacer.targetView as? ShimmerFrameLayout)?.stopShimmer()
         mViewReplacer.restore()
     }

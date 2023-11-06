@@ -10,4 +10,5 @@ interface SkeletonScreen {
      */
     fun show(): SkeletonScreen
     fun hide()
+    val isSowing: Boolean
 }

@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by ethanhua on 2017/7/29.
  */
 class RecyclerViewSkeletonScreen private constructor(builder: Builder) : SkeletonScreen {
+    override var isSowing: Boolean = false
+        private set
+
     private val mRecyclerView = builder.mRecyclerView
     private val mActualAdapter = builder.mActualAdapter
     private val mSkeletonAdapter = SkeletonAdapter().apply {
@@ -23,7 +26,7 @@ class RecyclerViewSkeletonScreen private constructor(builder: Builder) : Skeleto
         baseColor = builder.mShimmerBaseColor
         shimmerAngle = builder.mShimmerAngle
         shimmerDuration = builder.mShimmerDuration
-        direction = builder.mDirection
+        direction = builder.mShimmerDirection
         shape = builder.mShimmerShape
         repeatCount = builder.mRepeatCount
         repeatDelay = builder.mRepeatDelay
@@ -31,6 +34,7 @@ class RecyclerViewSkeletonScreen private constructor(builder: Builder) : Skeleto
     }
     private val mRecyclerViewFrozen = builder.mFrozen
     override fun show(): RecyclerViewSkeletonScreen {
+        isSowing = true
         mRecyclerView.adapter = mSkeletonAdapter
         if (!mRecyclerView.isComputingLayout && mRecyclerViewFrozen) {
             mRecyclerView.suppressLayout(true)
@@ -39,13 +43,14 @@ class RecyclerViewSkeletonScreen private constructor(builder: Builder) : Skeleto
     }
 
     override fun hide() {
+        isSowing = false
         mRecyclerView.adapter = mActualAdapter
     }
 
     class Builder(val mRecyclerView: RecyclerView) : SkeletonBuilder(mRecyclerView) {
         internal var mActualAdapter: RecyclerView.Adapter<*>? = null
         override var mSkeletonLayoutResID = R.layout.layout_default_item_skeleton
-        internal var mDirection = Direction.LEFT_TO_RIGHT
+        //internal var mDirection = Direction.LEFT_TO_RIGHT
         internal var mItemCount = 10
         internal var mItemsResIDArray: IntArray = IntArray(0)
         internal var mFrozen = true

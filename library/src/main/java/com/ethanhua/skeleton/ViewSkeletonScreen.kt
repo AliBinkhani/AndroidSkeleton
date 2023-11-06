@@ -29,6 +29,9 @@ class ViewSkeletonScreen private constructor(builder: Builder) : SkeletonScreen 
     private val mRepeatDelay = builder.mRepeatDelay
     private val mRepeatMode = builder.mRepeatMode
 
+    override var isSowing: Boolean = false
+        private set
+
     private fun generateShimmerContainerLayout(parentView: ViewGroup): ShimmerFrameLayout {
         val shimmerLayout = LayoutInflater.from(mActualView.context).inflate(R.layout.layout_shimmer, parentView, false) as ShimmerFrameLayout
         val shimmer = if (mUseAlpha) {
@@ -80,6 +83,7 @@ class ViewSkeletonScreen private constructor(builder: Builder) : SkeletonScreen 
     }
 
     override fun show(): ViewSkeletonScreen {
+        isSowing = true
         val skeletonLoadingView = generateSkeletonLoadingView()
         if (skeletonLoadingView != null) {
             mViewReplacer.replace(skeletonLoadingView)
@@ -88,6 +92,7 @@ class ViewSkeletonScreen private constructor(builder: Builder) : SkeletonScreen 
     }
 
     override fun hide() {
+        isSowing = false
         (mViewReplacer.targetView as? ShimmerFrameLayout)?.stopShimmer()
         mViewReplacer.restore()
     }
