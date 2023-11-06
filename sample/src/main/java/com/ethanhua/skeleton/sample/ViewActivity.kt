@@ -11,10 +11,12 @@ import com.ethanhua.skeleton.Shape
 import com.ethanhua.skeleton.Skeleton.bind
 import com.ethanhua.skeleton.SkeletonScreen
 import com.ethanhua.skeleton.sample.adapter.TopicAdapter
-import kotlinx.android.synthetic.main.activity_view.*
+import com.ethanhua.skeleton.sample.databinding.ActivityViewBinding
 import java.lang.ref.WeakReference
 
 class ViewActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityViewBinding
     private var skeletonScreen: SkeletonScreen? = null
 
     class MyHandler internal constructor(activity: ViewActivity) : Handler() {
@@ -30,12 +32,13 @@ class ViewActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view)
+        binding = ActivityViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val type = intent.getStringExtra(PARAMS_TYPE)
         val adapter = TopicAdapter()
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
         if (TYPE_VIEW == type) {
-            skeletonScreen = bind(rootView)
+            skeletonScreen = bind(binding.rootView)
                     .load(R.layout.activity_view_skeleton)
                     .duration(1000)
                     .baseAlpha(0.1f)
@@ -47,7 +50,7 @@ class ViewActivity : AppCompatActivity() {
                     .show()
         }
         if (TYPE_IMG_LOADING == type) {
-            skeletonScreen = bind(rootView)
+            skeletonScreen = bind(binding.rootView)
                     .load(R.layout.layout_img_skeleton)
                     .duration(1000)
                     .alpha(1f)

@@ -6,23 +6,27 @@ import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.ethanhua.skeleton.ViewReplacer
-import kotlinx.android.synthetic.main.activity_status_view.*
+import com.ethanhua.skeleton.sample.databinding.ActivityStatusViewBinding
 
 class StatusViewActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityStatusViewBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_status_view)
-        val viewReplacer = ViewReplacer(tv_content)
-        btn_loading.setOnClickListener {
+        binding = ActivityStatusViewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val viewReplacer = ViewReplacer(binding.tvContent)
+        binding.btnLoading.setOnClickListener {
             viewReplacer.replace(R.layout.layout_progress)
         }
-        btn_error.setOnClickListener {
+        binding.btnError.setOnClickListener {
             viewReplacer.replace(R.layout.layout_error)
         }
-        btn_empty.setOnClickListener {
+        binding.btnEmpty.setOnClickListener {
             viewReplacer.replace(R.layout.layout_empty_view)
         }
-        btn_content.setOnClickListener {
+        binding.btnContent.setOnClickListener {
             viewReplacer.restore()
         }
     }

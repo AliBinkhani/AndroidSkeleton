@@ -1,6 +1,7 @@
 package com.ethanhua.skeleton
 
 import android.view.View
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.FloatRange
 import androidx.annotation.IntRange
@@ -41,16 +42,26 @@ abstract class SkeletonBuilder(internal val mView: View) {
         return this
     }
 
-    open fun baseColor(@ColorRes shimmerBaseColor: Int): SkeletonBuilder {
+    open fun baseColorRes(@ColorRes shimmerBaseColor: Int): SkeletonBuilder {
         mShimmerBaseColor = ContextCompat.getColor(mView.context, shimmerBaseColor)
+        return this
+    }
+
+    open fun baseColor(@ColorInt shimmerBaseColor: Int): SkeletonBuilder {
+        mShimmerBaseColor = shimmerBaseColor
         return this
     }
 
     /**
      * @param shimmerColor the shimmer color
      */
-    open fun color(@ColorRes shimmerColor: Int): SkeletonBuilder {
+    open fun colorRes(@ColorRes shimmerColor: Int): SkeletonBuilder {
         mShimmerColor = ContextCompat.getColor(mView.context, shimmerColor)
+        return this
+    }
+
+    open fun color(@ColorInt shimmerColor: Int): SkeletonBuilder {
+        mShimmerColor = shimmerColor
         return this
     }
 

@@ -1,6 +1,7 @@
 package com.ethanhua.skeleton
 
 import android.view.View
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -14,6 +15,11 @@ object Skeleton {
 
     @JvmStatic
     fun bind(view: View): ViewSkeletonScreen.Builder {
+        return ViewSkeletonScreen.Builder(view)
+    }
+
+    @JvmStatic
+    fun bind(view: LinearLayout): ViewSkeletonScreen.Builder {
         return ViewSkeletonScreen.Builder(view)
     }
 }

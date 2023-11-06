@@ -1,6 +1,7 @@
 package com.ethanhua.skeleton
 
 import androidx.annotation.ArrayRes
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
@@ -99,6 +100,74 @@ class RecyclerViewSkeletonScreen private constructor(builder: Builder) : Skeleto
         init {
             mShimmerColor = ContextCompat.getColor(mRecyclerView.context, R.color.shimmer_color)
             mShimmerBaseColor = ContextCompat.getColor(mRecyclerView.context, R.color.shimmer_base_color)
+        }
+
+        /**
+         * Below functions just override for cast
+         */
+
+        override fun load(skeletonLayoutResID: Int): Builder {
+            return super.load(skeletonLayoutResID) as Builder
+        }
+
+        override fun baseAlpha(alpha: Float): Builder {
+            return super.baseAlpha(alpha) as Builder
+        }
+
+        override fun alpha(alpha: Float): Builder {
+            return super.alpha(alpha) as Builder
+        }
+
+        override fun baseColorRes(@ColorRes shimmerBaseColor: Int): Builder {
+            return super.baseColorRes(shimmerBaseColor) as Builder
+        }
+
+        override fun baseColor(shimmerBaseColor: Int): Builder {
+            return super.baseColor(shimmerBaseColor) as Builder
+        }
+
+        override fun colorRes(@ColorRes shimmerColor: Int): Builder {
+            return super.colorRes(shimmerColor) as Builder
+        }
+
+        override fun color(shimmerColor: Int): Builder {
+            return super.color(shimmerColor) as Builder
+        }
+
+        override fun shimmer(shimmer: Boolean): Builder {
+            return super.shimmer(shimmer) as Builder
+        }
+
+        override fun duration(shimmerDuration: Long): Builder {
+            return super.duration(shimmerDuration) as Builder
+        }
+
+        override fun angle(shimmerAngle: Int): Builder {
+            return super.angle(shimmerAngle) as Builder
+        }
+
+        override fun direction(direction: Direction): Builder {
+            return super.direction(direction) as Builder
+        }
+
+        override fun setUseAlpha(use: Boolean): Builder {
+            return super.setUseAlpha(use) as Builder
+        }
+
+        override fun shape(shape: Shape): Builder {
+            return super.shape(shape) as Builder
+        }
+
+        override fun repeatCount(repeatCount: Int): Builder {
+            return super.repeatCount(repeatCount) as Builder
+        }
+
+        override fun repeatMode(repeatMode: RepeatMode): Builder {
+            return super.repeatMode(repeatMode) as Builder
+        }
+
+        override fun repeatDelay(repeatDelay: Long): Builder {
+            return super.repeatDelay(repeatDelay) as Builder
         }
     }
 }
