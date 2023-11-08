@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
  * Created by ethanhua on 2017/7/29.
  */
 class RecyclerViewSkeletonScreen private constructor(builder: Builder) : SkeletonScreen {
-    override var isSowing: Boolean = false
+    override var isShowing: Boolean = false
         private set
 
     private val mRecyclerView = builder.mRecyclerView
@@ -34,7 +34,7 @@ class RecyclerViewSkeletonScreen private constructor(builder: Builder) : Skeleto
     }
     private val mRecyclerViewFrozen = builder.mFrozen
     override fun show(): RecyclerViewSkeletonScreen {
-        isSowing = true
+        isShowing = true
         mRecyclerView.adapter = mSkeletonAdapter
         if (!mRecyclerView.isComputingLayout && mRecyclerViewFrozen) {
             mRecyclerView.suppressLayout(true)
@@ -43,7 +43,7 @@ class RecyclerViewSkeletonScreen private constructor(builder: Builder) : Skeleto
     }
 
     override fun hide() {
-        isSowing = false
+        isShowing = false
         mRecyclerView.adapter = mActualAdapter
     }
 

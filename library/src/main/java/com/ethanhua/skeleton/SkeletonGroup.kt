@@ -5,7 +5,7 @@ package com.ethanhua.skeleton
  * @date 20-11-11
  */
 class SkeletonGroup: SkeletonScreen {
-    override var isSowing: Boolean = false
+    override var isShowing: Boolean = false
         private set
 
     private val skeletonSet = mutableSetOf<SkeletonScreen>()
@@ -19,7 +19,7 @@ class SkeletonGroup: SkeletonScreen {
     }
 
     override fun show(): SkeletonScreen {
-        isSowing = true
+        isShowing = true
         skeletonSet.forEach {
             it.show()
         }
@@ -27,7 +27,7 @@ class SkeletonGroup: SkeletonScreen {
     }
 
     override fun hide() {
-        isSowing = false
+        isShowing = false
         skeletonSet.forEach {
             it.hide()
         }

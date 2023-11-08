@@ -7,7 +7,6 @@ import android.view.View.OnAttachStateChangeListener
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
 
@@ -34,7 +33,7 @@ class LinearLayoutViewSkeletonScreen private constructor(builder: Builder) : Ske
     private val mItemCount = builder.mItemCount
     private val mItemsOrientation = builder.mOrientation
 
-    override var isSowing: Boolean = false
+    override var isShowing: Boolean = false
         private set
 
     private fun generateShimmerContainerLayout(parentView: ViewGroup): ShimmerFrameLayout {
@@ -96,7 +95,7 @@ class LinearLayoutViewSkeletonScreen private constructor(builder: Builder) : Ske
     }
 
     override fun show(): LinearLayoutViewSkeletonScreen {
-        isSowing = true
+        isShowing = true
         val skeletonLoadingView = generateSkeletonLoadingView()
         if (skeletonLoadingView != null) {
             mViewReplacer.replace(skeletonLoadingView)
@@ -105,7 +104,7 @@ class LinearLayoutViewSkeletonScreen private constructor(builder: Builder) : Ske
     }
 
     override fun hide() {
-        isSowing = false
+        isShowing = false
         (mViewReplacer.targetView as? ShimmerFrameLayout)?.stopShimmer()
         mViewReplacer.restore()
     }
